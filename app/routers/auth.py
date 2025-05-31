@@ -16,8 +16,8 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 30
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")  # Обновили tokenUrl
 
-def verify_password(plain_password, hashed_password):
-    return pwd_context.verify(plain_password, hashed_password)
+def verify_password(plain_password, hash_password):
+    return pwd_context.verify(plain_password, hash_password)
 
 def get_password_hash(password):
     return pwd_context.hash(password)

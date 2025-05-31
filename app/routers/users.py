@@ -14,8 +14,8 @@ def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     db_user = crud.get_user_by_email(db, email=user.email)
     if db_user:
         raise HTTPException(status_code=400, detail="Email already registered")
-    hashed_password = get_password_hash(user.password)  # 👈 исправлено
-    return crud.create_user(db=db, user=user, hashed_password=hashed_password)
+    hash_password = get_password_hash(user.password)  # 👈 исправлено
+    return crud.create_user(db=db, user=user, hash_password=hash_password)
 
 @router.get("/me", response_model=schemas.User)
 def read_user_me(current_user: schemas.User = Depends(dependencies.get_current_user)):

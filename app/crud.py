@@ -11,11 +11,11 @@ def get_user(db: Session, user_id: int):
     return db.query(models.User).filter(models.User.id == user_id).first()
 
 def create_user(db: Session, user: schemas.UserCreate):
-    hashed_password = pwd_context.hash(user.password)
+    hash_password = pwd_context.hash(user.password)
     db_user = models.User(
         nickname=user.nickname,
         email=user.email,
-        hashed_password=hashed_password
+        hash_password=hash_password
     )
     db.add(db_user)
     db.commit()
